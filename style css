@@ -1,0 +1,74 @@
+:root {
+  --royal-blue: #002366;
+  --gold: #D4AF37;
+  --black: #000000;
+  --white: #ffffff;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--white);
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+#app {
+  width: 100%;
+  max-width: 400px;
+  height: 90vh;
+  background: var(--royal-blue);
+  border: 2px solid var(--gold);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+h1 {
+  text-align: center;
+  color: var(--gold);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+#chatMessages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--gold);
+}
+
+.message {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+  border-left: 3px solid var(--gold);
+}
+
+input {
+  background: var(--black);
+  border: 1px solid var(--gold);
+  color: var(--white);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+button {
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  padding: 10px;
+  margin-top: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: #f1c40f;
+}
