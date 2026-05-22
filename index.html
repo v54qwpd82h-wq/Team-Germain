@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+    <meta charset="UTF-8">
+    <title>Team Germain - Chat</title>
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js";
+
+        // Mete detay Firebase ou yo isit la
+        const firebaseConfig = {
+            apiKey: "AIza...",
+            authDomain: "team-germain.firebaseapp.com",
+            projectId: "team-germain",
+            storageBucket: "team-germain.appspot.com",
+            messagingSenderId: "...",
+            appId: "..."
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Fonksyon pou voye mesaj
+        async function sendMessage() {
+            const input = document.getElementById('messageInput');
+            if (input.value.trim() === "") return;
+            
+            await addDoc(collection(db, "messages"), {
+                text: input.value,
+                sender: "Itilizatè", // Ou ka chanje sa pou non moun nan
+                createdAt: serverTimestamp()
+            });
+            input.value = "";
+        }
+
+        // Koute mesaj yo an tan reyèl
+        const q = query(collection(db, "messages"), orderBy("createdAt"));
+        onSnapshot(q, (snapshot) => {
+            const chatDiv = document.getElementById('chatMessages');
+            chatDiv.innerHTML = "";
+            snapshot.forEach((doc) => {
+                chatDiv.innerHTML += `<div class="message">${doc.data().text}</div>`;
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="app">
+        <h1>Team Germain</h1>
+        <div id="chatMessages"></div>
+        <input type="text" id="messageInput" placeholder="Ekri yon mesaj...">
+        <button onclick="sendMessage()">Voye</button>
+    </div>
+</body>
+</html>
